@@ -10,34 +10,34 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-
     // Your code here...
+    // Incomplete Components
+    // Neither the modal close button nor the overlay click to close work but open works, also the modal backdrop doesnt take 100percent of the screen, I didnt add the validations to the telephone and dropdown even though i could have but wasnt in the instructions,also the bulletpoints in the password instructions remained black instead of blue.
     //selectors
     const form = document.querySelector('form');
-   const companyInput = document.getElementById('company');
+    const companyInput = document.getElementById('company');
     const firstName = document.getElementById('fname');
     const lastName = document.getElementById('lname');
     const email = document.getElementById('email');
     const password = document.getElementById('password');
     const phoneNumber = document.getElementById('phone-number');
-    const failIcon = '<i class="fas fa-times-circle fa-2x invalid-cross hidden-icon"></i>'
-    const correctIcon = '<i class="fas fa-solid fa-check"></i>'
-    const controls = document.querySelectorAll('.controls')
-    const fontCDN = document.createElement('script')
-    fontCDN.src = 'https://kit.fontawesome.com/b5870135c6.js'
-   fontCDN.crossorigin = 'anonymous'
-    document.querySelector('head').appendChild(fontCDN)
-    const modalOpenParent = document.getElementById('agree')
+    const failIcon =
+        '<i class="fas fa-times-circle fa-2x invalid-cross hidden-icon"></i>';
+    const correctIcon = '<i class="fas fa-solid fa-check"></i>';
+    const controls = document.querySelectorAll('.controls');
+    const fontCDN = document.createElement('script');
+    fontCDN.src = 'https://kit.fontawesome.com/b5870135c6.js';
+    fontCDN.crossorigin = 'anonymous';
+    document.querySelector('head').appendChild(fontCDN);
+    const modalOpenParent = document.getElementById('agree');
 
+    //classes
 
-
-//classes
-
-    const classSelectors = document.createElement('style')
-    classSelectors.type='text/css'
+    const classSelectors = document.createElement('style');
+    classSelectors.type = 'text/css';
     classSelectors.innerHTML = `
     .checkContainer{
      background-color: #0e741c;
@@ -130,8 +130,8 @@ display: none !important
         .pass-container li p {color: black!important}
         .pass-container li {color: blue}
 
-   `
-    document.head.appendChild(classSelectors)
+   `;
+    document.head.appendChild(classSelectors);
 
     //insert select dropdown and phone number div
     const dropDownContainer = `
@@ -155,22 +155,30 @@ display: none !important
                             placeholder="Phone Number (optional)"
                         />
                     </div>
-    `
-    password.parentElement.parentElement.insertAdjacentHTML('afterend', dropDownContainer)
-//insert icons to input elements
-    controls.forEach(div=> div.insertAdjacentHTML('afterbegin', `
+    `;
+    password.parentElement.parentElement.insertAdjacentHTML(
+        'afterend',
+        dropDownContainer
+    );
+    //insert icons to input elements
+    controls.forEach((div) =>
+        div.insertAdjacentHTML(
+            'afterbegin',
+            `
                 <div class="checkContainer iconPosition">
                     <i class="fas fa-solid fa-check pass"></i>
                  </div>
                <i class="fas fa-times-circle fa-2x invalid-cross iconPosition"></i></div>
-    `))
-    controls.forEach(control=>control.style.position='relative')
+    `
+        )
+    );
+    controls.forEach((control) => (control.style.position = 'relative'));
 
-form.addEventListener('submit',(e)=>{
-   e.preventDefault();
-})
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+    });
     //inserting the element for selecting reason
-  const reasonBoxes = `
+    const reasonBoxes = `
  <p class="reason-title">I'm signing up to</p>
     <div class="interests-container">
 
@@ -197,123 +205,131 @@ form.addEventListener('submit',(e)=>{
                         </button>
                     </div>
 
-    `
-    const reasonBoxStyle ={
-        textAlign:'left',
+    `;
+    const reasonBoxStyle = {
+        textAlign: 'left',
         display: 'flex',
         width: '100%',
         marginBottom: '30px',
         height: '120px',
-    }
-    const interest ={
-                width: '33%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'space-evenly',
-                outline: 'none',
-                border: '2px solid rgba(199, 199, 199, 0.453)',
-                borderRight: '2px',
-                cursor: 'pointer',
-    }
-    form.insertAdjacentHTML('afterbegin',reasonBoxes)
-    Object.assign(document.querySelector('.interests-container').style, reasonBoxStyle)
-    document.querySelector('.reason-title').style.textAlign = 'left'
-      const learnDiv = document.querySelector('.learn')
-    const startDiv = document.querySelector('.start')
-    const switchDiv = document.querySelector('.switch')
-    Object.assign(learnDiv.style, interest)
-    Object.assign(startDiv.style, interest)
-    Object.assign(switchDiv.style, interest)
+    };
+    const interest = {
+        width: '33%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        outline: 'none',
+        border: '2px solid rgba(199, 199, 199, 0.453)',
+        borderRight: '2px',
+        cursor: 'pointer',
+    };
+    form.insertAdjacentHTML('afterbegin', reasonBoxes);
+    Object.assign(
+        document.querySelector('.interests-container').style,
+        reasonBoxStyle
+    );
+    document.querySelector('.reason-title').style.textAlign = 'left';
+    const learnDiv = document.querySelector('.learn');
+    const startDiv = document.querySelector('.start');
+    const switchDiv = document.querySelector('.switch');
+    Object.assign(learnDiv.style, interest);
+    Object.assign(startDiv.style, interest);
+    Object.assign(switchDiv.style, interest);
     //Event listener to control highlighting of interest divs
-    const activeClass ={
-      border: '2px solid #8cbde7',
-      backgroundColor: '#8cbde76f',
-      color: '#2f97d5',
-    }
-    const resetClass={
-         border: '2px solid #c7c7c774',
-         backgroundColor: 'transparent',
-    }
-    learnDiv.addEventListener('click',()=>{
-       Object.assign(startDiv.style,resetClass)
-       Object.assign(switchDiv.style,resetClass)
+    const activeClass = {
+        border: '2px solid #8cbde7',
+        backgroundColor: '#8cbde76f',
+        color: '#2f97d5',
+    };
+    const resetClass = {
+        border: '2px solid #c7c7c774',
+        backgroundColor: 'transparent',
+    };
+    learnDiv.addEventListener('click', () => {
+        Object.assign(startDiv.style, resetClass);
+        Object.assign(switchDiv.style, resetClass);
 
-    Object.assign(learnDiv.style, activeClass)})
+        Object.assign(learnDiv.style, activeClass);
+    });
 
-    startDiv.addEventListener('click',()=>{
-    Object.assign(learnDiv.style,resetClass)
-    Object.assign(switchDiv.style,resetClass)
-    Object.assign(startDiv.style, activeClass)})
+    startDiv.addEventListener('click', () => {
+        Object.assign(learnDiv.style, resetClass);
+        Object.assign(switchDiv.style, resetClass);
+        Object.assign(startDiv.style, activeClass);
+    });
 
-    switchDiv.addEventListener('click',()=>{
-    Object.assign(learnDiv.style,resetClass)
-    Object.assign(startDiv.style,resetClass)
-    Object.assign(switchDiv.style, activeClass)})
+    switchDiv.addEventListener('click', () => {
+        Object.assign(learnDiv.style, resetClass);
+        Object.assign(startDiv.style, resetClass);
+        Object.assign(switchDiv.style, activeClass);
+    });
 
     //validation for names
-     function checkInput(element) {
-                if (element.value.trim().length < 1) {
-                    element.parentElement.classList.remove('success');
-                    element.parentElement.classList.add('fail');
-                } else {
-                    element.parentElement.classList.remove('fail');
-                    element.parentElement.classList.add('success');
-                }
-            }
+    function checkInput(element) {
+        if (element.value.trim().length < 1) {
+            element.parentElement.classList.remove('success');
+            element.parentElement.classList.add('fail');
+        } else {
+            element.parentElement.classList.remove('fail');
+            element.parentElement.classList.add('success');
+        }
+    }
 
-companyInput.addEventListener('blur',()=>{
-  checkInput(companyInput)
-})
-    firstName.addEventListener('blur', ()=>{
+    companyInput.addEventListener('blur', () => {
+        checkInput(companyInput);
+    });
+    firstName.addEventListener('blur', () => {
         const nameValue = firstName.value.trim();
         if (/\d/.test(nameValue)) {
-                    firstName.parentElement.classList.remove('success');
-                    firstName.parentElement.classList.add('fail');
-                    return;
-                }
-                checkInput(firstName);
+            firstName.parentElement.classList.remove('success');
+            firstName.parentElement.classList.add('fail');
+            return;
+        }
+        checkInput(firstName);
     });
-    lastName.addEventListener('blur', ()=>{
+    lastName.addEventListener('blur', () => {
         const nameValue = lastName.value.trim();
-         if (/\d/.test(nameValue)) {
-                    lastName.parentElement.classList.remove('success');
-                    lastName.parentElement.classList.add('fail');
-                    return;
-                }
-                checkInput(lastName);
-   
+        if (/\d/.test(nameValue)) {
+            lastName.parentElement.classList.remove('success');
+            lastName.parentElement.classList.add('fail');
+            return;
+        }
+        checkInput(lastName);
     });
     //email validation
-    email.addEventListener('blur', ()=>{
+    email.addEventListener('blur', () => {
         const emailValue = email.value.trim();
-        if(checkEmail(emailValue) ){
-           email.parentElement.classList.remove('fail');
-           email.parentElement.classList.add('success')
-        return}
-        else{
+        if (checkEmail(emailValue)) {
+            email.parentElement.classList.remove('fail');
+            email.parentElement.classList.add('success');
+            return;
+        } else {
             email.parentElement.classList.remove('success');
             email.parentElement.classList.add('fail');
         }
         function checkEmail(mail) {
-	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(mail);
+            return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+                mail
+            );
         }
-})
+    });
     //Password event listener
 
-    password.addEventListener('focus',()=>{
-        const passwordStyles= {
-            display:'flex',
+    password.addEventListener('focus', () => {
+        const passwordStyles = {
+            display: 'flex',
             textAlign: 'left',
-
-}
-        const listStyle ={
-            color:'blue'
-        }
-        const pStyle ={
-        color:'black'
-        }
-        password.parentElement.insertAdjacentHTML('afterend',`
+        };
+        const listStyle = {
+            color: 'blue',
+        };
+        const pStyle = {
+            color: 'black',
+        };
+        password.parentElement.insertAdjacentHTML(
+            'afterend',
+            `
         <div id="pass-container">
              <div><ul><li class="pass-list fadeIn">
              <p>One lowercase character</p></li><li class="pass-list fadeIn">
@@ -322,39 +338,49 @@ companyInput.addEventListener('blur',()=>{
              <p>One special character</p></li><li class="pass-list fadeIn">
              <p>Eight characters minimum</p></li></ul></div>
         </div>
-        `)
-        const passListItems = document.querySelectorAll('.pass-list')
-        Object.assign(document.getElementById('pass-container').style,passwordStyles)
-
-
-})
-    password.addEventListener('blur',()=>{
+        `
+        );
+        const passListItems = document.querySelectorAll('.pass-list');
+        Object.assign(
+            document.getElementById('pass-container').style,
+            passwordStyles
+        );
+    });
+    password.addEventListener('blur', () => {
         document.getElementById('pass-container').remove();
         const passValue = password.value.trim();
-        if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(passValue)) {
-                    password.parentElement.classList.remove('fail');
+        if (
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(
+                passValue
+            )
+        ) {
+            password.parentElement.classList.remove('fail');
 
-                    password.parentElement.classList.add('success');
-                } else {
-                    password.parentElement.classList.remove('success');
+            password.parentElement.classList.add('success');
+        } else {
+            password.parentElement.classList.remove('success');
 
-                    password.parentElement.classList.add('fail');
-                }
-    })
+            password.parentElement.classList.add('fail');
+        }
+    });
 
+    //listeners to open modals
+    console.log(modalOpenParent.children);
+    const termsModal = modalOpenParent.children[0];
+    const privacyModal = modalOpenParent.children[1];
+    const closeModalBtn = document.querySelectorAll('.close-modal-btn');
+    const termsModalContainer = document.querySelector(
+        '.terms-modal-container'
+    );
+    const privacyModalContainer = document.querySelector(
+        '.privacy-modal-container'
+    );
 
-//listeners to open modals
-    console.log(modalOpenParent.children)
-    const termsModal =modalOpenParent.children[0]
-    const privacyModal =modalOpenParent.children[1]
-    const closeModalBtn = document.querySelectorAll('.close-modal-btn')
-    const termsModalContainer = document.querySelector('.terms-modal-container')
-    const privacyModalContainer = document.querySelector('.privacy-modal-container')
-
-
-termsModal.addEventListener('click',(e)=>{
-    e.preventDefault()
-    document.querySelector('body').insertAdjacentHTML('beforeend',`
+    termsModal.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('body').insertAdjacentHTML(
+            'beforeend',
+            `
        <article class="terms-modal-container modal-container">
                 <div class="terms-mod modal-content">
                     <div class="close-modal-btn">&times;</div>
@@ -362,24 +388,33 @@ termsModal.addEventListener('click',(e)=>{
                     </div>
                 </div>
             </article>
-    `)
-})
+    `
+        );
+    });
 
-    privacyModal.addEventListener('click',(e)=>{
-        e.preventDefault()
-        document.querySelector('body').insertAdjacentHTML('beforeend', `<article class="privacy-modal-container modal-container"><div class="privacy-mod modal-content"><div class="close-modal-btn">&times;</div><iframe src="https://www.helpscout.com/company/legal/privacy/" frameborder="0"></iframe>
-</div></div></article>`)})
+    privacyModal.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('body').insertAdjacentHTML(
+            'beforeend',
+            `<article class="privacy-modal-container modal-container"><div class="privacy-mod modal-content"><div class="close-modal-btn">&times;</div><iframe src="https://www.helpscout.com/company/legal/privacy/" frameborder="0"></iframe>
+</div></div></article>`
+        );
+    });
 
-     closeModalBtn.forEach(btn=>btn.addEventListener('click',(e)=>{
-         e.stopPropagation()
-termsModalContainer.remove()
-         console.log('click')
-            }))
-    window.addEventListener('click',(e)=>{
-            if(e.target==termsModalContainer)
-           { termsModalContainer.style.display='none'
+    closeModalBtn.forEach((btn) =>
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            termsModalContainer.remove();
+            console.log('click');
+        })
+    );
+    window.addEventListener('click', (e) => {
+        if (e.target == termsModalContainer) {
+            termsModalContainer.style.display = 'none';
         }
-            if(e.target==privacyModalContainer){privacyModalContainer.style.display='none'
-            document.querySelector('body').style.overflow='visible'
+        if (e.target == privacyModalContainer) {
+            privacyModalContainer.style.display = 'none';
+            document.querySelector('body').style.overflow = 'visible';
         }
-})})();
+    });
+})();
